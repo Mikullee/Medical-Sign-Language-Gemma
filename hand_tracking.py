@@ -1,47 +1,69 @@
 import cv2
 import mediapipe as mp
+import numpy as np
+import os
+import time
 
-# 1. 初始化 Mediapipe 的手部偵測模組
+# --- 1. 設定區 ---
+# Windows 系統強迫存到桌面
+DATA_PATH = os.path.join(os.path.expanduser("~"), "Desktop", "Medical_Sign_Data")  # 資料儲存根目錄
+action = "fever"                # 正在錄製的動作名稱 (例如：發燒)
+no_sequences = 30               # 預計錄製幾組動作
+sequence_length = 30            # 每一組動作錄製幾幀 (影格)
+
+# 建立資料夾
+if not os.path.exists(os.path.join(DATA_PATH, action)):
+    os.makedirs(os.path.join(DATA_PATH, action))
+
+# --- 2. 初始化 Mediapipe ---
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
-hands = mp_hands.Hands(
-    static_image_mode=False,
-    max_num_hands=2,              # 醫療手語有時會用到雙手
-    min_detection_confidence=0.7, 
-    min_tracking_confidence=0.5
-)
+hands = mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.5)
 
-# 2. 開啟電腦視訊鏡頭
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0) # 如果是 iVCam 請嘗試改為 1
 
-print("程式啟動中... 請對著鏡頭比出手勢。按 'q' 鍵可退出。")
-
-while cap.isOpened():
-    success, image = cap.read()
-    if not success:
-        print("無法取得畫面")
-        break
-
-    # 為了辨識，需先將 BGR 轉為 RGB
-    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    results = hands.process(image_rgb)
-
-    # 3. 畫出手部節點
+# 輔助函式：提取座標並轉為 numpy 陣列
+def extract_keypoints(results):
     if results.multi_hand_landmarks:
-        for hand_landmarks in results.multi_hand_landmarks:
-            # 畫出點跟線
-            mp_drawing.draw_landmarks(
-                image, 
-                hand_landmarks,
-                mp_hands.HAND_CONNECTIONS
-            )
+        # 這裡簡單處理：只取第一隻偵測到的手
+        lh = np.array([[res.x, res.y, res.z] for res in results.multi_hand_landmarks[0].landmark]).flatten()
+    else:
+        # 如果沒偵測到，填充 0
+        lh = np.zeros(21*3)
+    return lh
 
-    # 顯示畫面
-    cv2.imshow('Medical Sign Language - Base', image)
+# --- 3. 開始錄製流程 ---
+for sequence in range(no_sequences):
+    for frame_num in range(sequence_length):
+        success, image = cap.read()
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        results = hands.process(image_rgb)
+        
+        # 繪製畫面
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                mp_drawing.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-    # 按 'q' 鍵退出程式
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        # 顯示錄製提示文字
+        if frame_num == 0:
+            cv2.putText(image, 'STARTING COLLECTION', (120,200), 
+                       cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 4, cv2.LINE_AA)
+            cv2.putText(image, f'Collecting frames for {action} Video Number {sequence}', (15,12), 
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1, cv2.LINE_AA)
+            cv2.imshow('Medical Sign Language - Data Collection', image)
+            cv2.waitKey(2000) # 每組動作間隔 2 秒，讓你準備
+        else: 
+            cv2.putText(image, f'Collecting frames for {action} Video Number {sequence}', (15,12), 
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1, cv2.LINE_AA)
+            cv2.imshow('Medical Sign Language - Data Collection', image)
+
+        # 儲存關鍵點數據
+        keypoints = extract_keypoints(results)
+        npy_path = os.path.join(DATA_PATH, action, f"{sequence}_{frame_num}.npy")
+        np.save(npy_path, keypoints)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
 cap.release()
 cv2.destroyAllWindows()

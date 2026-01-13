@@ -1,3 +1,8 @@
 mediapipe==0.10.11
 opencv-python
-numpy==1.26.4
+# 必須使用 1.23.x，否則會與 TensorFlow 2.15 衝突
+numpy==1.23.5
+# 必須加入這個，否則別人下載後沒大腦可用
+tensorflow==2.15.0
+# 建議加入這個，確保環境一致
+protobuf==3.20.3
