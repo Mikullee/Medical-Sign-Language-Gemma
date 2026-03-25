@@ -1,0 +1,20 @@
+{
+  "num_labels": 18,
+  "num_training_windows": 2609,
+  "num_validation_windows": 652,
+  "best_val_accuracy": 0.7546,
+  "epochs": 12,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "window_size": 16,
+  "window_stride": 8,
+  "predict_window_stride": 4,
+  "frame_step": 2,
+  "min_confidence": 0.35,
+  "feature_mode": "relative+geometry+velocity",
+  "training_sources": [
+    "curated_gloss",
+    "GLOSS+",
+    "SEQ_segments_with_blank"
+  ]
+}
