@@ -1,3 +1,17 @@
+## Raw video location
+
+The uploaded raw sequence videos are currently maintained in branch `dev-agent-sync`.
+
+If `data/videos/raw_sequences` looks empty while you are viewing `main`, switch to the branch below to see the uploaded raw video data:
+
+- [View `dev-agent-sync` branch](https://github.com/Mikullee/Medical-Sign-Language-Gemma/tree/dev-agent-sync)
+
+中文說明：
+
+- `main` 目前保留較精簡、較穩定的 repo 結構。
+- 目前已上傳的 raw sequence 影片放在 `dev-agent-sync` branch。
+- 如果你在 `main` 看到 `data/videos/` 底下資料夾是空的，請切換到 `dev-agent-sync` 查看實際影片資料。
+
 # Medical Sign Language Gemma
 
 這個 repo 目前有兩條主線：
