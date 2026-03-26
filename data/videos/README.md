@@ -1,3 +1,16 @@
+## Branch note
+
+The uploaded raw sequence videos are currently maintained in branch `dev-agent-sync`.
+
+If this folder looks empty in `main`, view the branch below:
+
+- [View `dev-agent-sync` branch](https://github.com/Mikullee/Medical-Sign-Language-Gemma/tree/dev-agent-sync)
+
+中文說明：
+
+- `main` 這裡可能只保留資料夾結構。
+- 目前已上傳的 raw 影片在 `dev-agent-sync`。
+
 # 影片資料夾使用方式
 
 ## raw_sequences
