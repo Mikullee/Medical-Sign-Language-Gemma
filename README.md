@@ -1,90 +1,40 @@
-## Raw video location
+# Sign-Language-Recognition-Gemma
 
-The uploaded raw sequence videos are currently maintained in branch `dev-agent-sync`.
+## Raw Video Location
 
-If `data/videos/raw_sequences` looks empty while you are viewing `main`, switch to the branch below to see the uploaded raw video data:
+Uploaded raw sequence videos are maintained in branch `dev-agent-sync`.
 
-- [View `dev-agent-sync` branch](https://github.com/Mikullee/Medical-Sign-Language-Gemma/tree/dev-agent-sync)
+If `data/videos/raw_sequences` looks empty on `main`, switch to:
+- [dev-agent-sync branch](https://github.com/Mikullee/Sign-Language-Recognition-Gemma/tree/dev-agent-sync)
 
-中文說明：
+## Project Focus
 
-- `main` 目前保留較精簡、較穩定的 repo 結構。
-- 目前已上傳的 raw sequence 影片放在 `dev-agent-sync` branch。
-- 如果你在 `main` 看到 `data/videos/` 底下資料夾是空的，請切換到 `dev-agent-sync` 查看實際影片資料。
+This repository currently has two parallel tracks:
+1. Sequence data collection and annotation collaboration
+2. BiGRU baseline training/inference artifacts
 
-# Medical Sign Language Gemma
+Current strategy:
+- Gate A: verify 18 labels (including `BLANK`) can be recognized reliably
+- Gate B: connect `Qwen3.5-9B` for gloss-to-readable sentence generation
+- Gate C: expand gloss coverage only after A/B pass
 
-這個 repo 目前有兩條主線：
+## Start Here
 
-1. `sequence` 資料蒐集與標註協作
-2. `GRU baseline` 成果整理與展示
+Read these files in order:
+1. [docs/WORKFLOW_RULES.md](./docs/WORKFLOW_RULES.md)
+2. [docs/WEEKLY_GOALS.md](./docs/WEEKLY_GOALS.md)
+3. [docs/COMMIT_CONVENTION.md](./docs/COMMIT_CONVENTION.md)
+4. [docs/TEAM_TASKS.md](./docs/TEAM_TASKS.md)
+5. [docs/FILE_GUIDE.md](./docs/FILE_GUIDE.md)
+6. [baseline_gru/README.md](./baseline_gru/README.md)
 
-目前 `GRU baseline` 是可運作的基線；`HST-SLR` 是下一階段要評估的高階連續手語辨識方向。
-
-## 先看哪裡
-
-組員與老師如果第一次進 repo，先看這三個檔案：
-
-1. [docs/TEAM_TASKS.md](./docs/TEAM_TASKS.md)
-2. [docs/FILE_GUIDE.md](./docs/FILE_GUIDE.md)
-3. [baseline_gru/README.md](./baseline_gru/README.md)
-
-## 目前在做什麼
-
-### 1. Sequence 協作資料
-
-- 目標：建立 `300` 支 sequence 影片
-- 內容：錄影、審片、標註 `gloss sequence` 與部分 `start/end time`
-- 主要檔案放在：
-  - [data/annotations](./data/annotations)
-  - [data/videos/raw_sequences](./data/videos/raw_sequences)
-  - [data/videos/approved_sequences](./data/videos/approved_sequences)
-  - [data/videos/rerecord_needed](./data/videos/rerecord_needed)
-
-### 2. GRU baseline
-
-- 位置：[baseline_gru](./baseline_gru)
-- 內容：
-  - 目前可重跑的 `BiGRU` 訓練與推論腳本
-  - 兩個版本的模型權重
-  - 主影片 comparison CSV
-  - 兩支示範影片
-- 用途：
-  - 給教授看目前成果
-  - 當之後 `HST-SLR` 的比較基線
-
-## 影片與標註放置規則
-
-### 錄好的原始影片
-
-- 先放到：[data/videos/raw_sequences](./data/videos/raw_sequences)
-
-### 審片後合格影片
-
-- 移到：[data/videos/approved_sequences](./data/videos/approved_sequences)
-
-### 需要重錄的影片
-
-- 移到：[data/videos/rerecord_needed](./data/videos/rerecord_needed)
-
-### 標註相關 CSV
-
-- 全部放在：[data/annotations](./data/annotations)
-
-## 這個 repo 不放什麼
-
-以下內容不應直接進這個 repo：
-
-- 大量原始 gloss 影片
-- `temp/` 原始資料池
-- `data/landmarks/` 快取
-- HST-SLR 實驗快取與中間產物
-- 大量重複 comparison 影片
-
-## Repo 結構
+## Repository Structure
 
 ```text
 docs/
+  WORKFLOW_RULES.md
+  WEEKLY_GOALS.md
+  COMMIT_CONVENTION.md
   TEAM_TASKS.md
   FILE_GUIDE.md
 
