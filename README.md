@@ -21,11 +21,12 @@ Current strategy:
 
 Read these files in order:
 1. [docs/WORKFLOW_RULES.md](./docs/WORKFLOW_RULES.md)
-2. [docs/WEEKLY_GOALS.md](./docs/WEEKLY_GOALS.md)
-3. [docs/COMMIT_CONVENTION.md](./docs/COMMIT_CONVENTION.md)
-4. [docs/TEAM_TASKS.md](./docs/TEAM_TASKS.md)
-5. [docs/FILE_GUIDE.md](./docs/FILE_GUIDE.md)
-6. [baseline_gru/README.md](./baseline_gru/README.md)
+2. [docs/TEAM_UPLOAD_PLAYBOOK.md](./docs/TEAM_UPLOAD_PLAYBOOK.md)
+3. [docs/WEEKLY_GOALS.md](./docs/WEEKLY_GOALS.md)
+4. [docs/COMMIT_CONVENTION.md](./docs/COMMIT_CONVENTION.md)
+5. [docs/TEAM_TASKS.md](./docs/TEAM_TASKS.md)
+6. [docs/FILE_GUIDE.md](./docs/FILE_GUIDE.md)
+7. [baseline_gru/README.md](./baseline_gru/README.md)
 
 ## Repository Structure
 

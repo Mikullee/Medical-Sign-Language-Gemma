@@ -1,0 +1,4 @@
+video_name,sequence_id,signer_name,annotation_owner,order,label,start_sec,end_sec,done,notes
+SEQ01_A_01.mp4,SEQ01,NAME,annotator_name,1,今天,0.00,0.80,Y,
+SEQ01_A_01.mp4,SEQ01,NAME,annotator_name,2,大陸,0.81,1.50,Y,
+SEQ01_A_01.mp4,SEQ01,NAME,annotator_name,3,冷氣團,1.51,2.30,Y,
