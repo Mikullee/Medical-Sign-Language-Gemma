@@ -4,6 +4,7 @@
 
 1. 300 部 sequence 已完成錄製（raw）。
 2. 目前進入補強階段：補低 token gloss、審片、時間標註。
+3. 2026-05-12 新增 `admin15` 行政句錄影資料夾與說明，供三位組員同步補錄 15 句完整句子與句內詞。
 
 ## 新錄製清單（請先看）
 
@@ -16,6 +17,19 @@
 - 要錄哪些 sequence（P01/P02）
 - 每個 sequence 要錄幾次
 - 這批錄完會補到哪些 gloss token 缺口
+
+## 行政 15 句補錄
+
+這次新增的行政句任務請看：
+
+1. `docs/ADMIN15_RECORDING_GUIDE.md`
+2. `data/videos/README.md`
+
+這批資料已經建立在：
+
+1. 未審原始影片：`data/videos/raw_sequences/admin15/`
+2. 審片通過影片：`data/videos/approved_sequences/admin15/`
+3. 需要重錄影片：`data/videos/rerecord_needed/admin15/`
 
 ## 資料放置位置
 
